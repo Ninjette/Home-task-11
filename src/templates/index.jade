@@ -1,0 +1,14 @@
+doctype html
+html
+	head
+		- var page_name = "Temp"
+		include ./includes/head.jade
+
+	body
+		include ./includes/header.jade
+
+		main(ng-app="moviesApp")
+			div(ng-view ng-controller="mainController")
+
+
+		include ./includes/footer.jade

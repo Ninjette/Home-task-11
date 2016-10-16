@@ -1,0 +1,18 @@
+mlab.com
+здесь можно создать бесплатную базу данных
+
+for final task
+
+search 
+floors
+3 dropdown
+move manager
+zoom может не понадобится
+create new seats
+delete
+
+home task 11
+фильмы, 
+сделать proxi, cache.
+чтобы наша апишка отдавала, а не mbd, настроить кеширование, с local storage переходит в mongo.
+api, запрос идет на back end, а back end идет на omdb

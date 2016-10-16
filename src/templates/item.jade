@@ -1,0 +1,38 @@
+section.section-item(ng-controller="itemController")
+	.container
+		p.title About {{item.Type}}
+		.item
+			h3(ng-click="testFuncanother()").item__name 
+				strong Name: 
+				| {{item.Title}}
+			h5.item__description 
+				strong Description: 
+				| {{item.Plot}}
+			h5.item__type 
+				strong Type: 
+				|{{item.Type}}
+			h5.item__year 
+				strong Year: 
+				|{{item.Year}}
+			h5.item__actors 
+				strong Actors: 
+				|{{item.Actors}}
+			h5.item__director 
+				strong Director: 
+				|{{item.Director}}
+			h5.item__genre 
+				strong Genre: 
+				|{{item.Genre}}
+				
+			.reviews
+				p.reviews__title Reviews
+				.review(ng-repeat="review in reviews")
+					p.review__text Review: {{review.text}}
+					.review__rating Rating: {{review.rating}}/5
+			form.review-form(ng-submit="addReview(reviewText)")
+				h4.review-form__title Leave your review
+				textarea(type="text", ng-model="reviewText", required).review-form__input.form-control
+				h4 Rate {{item.Type}}
+				.item__rating.clearfix
+					.rating
+				input(type="submit", value="submit").btn.btn-success
