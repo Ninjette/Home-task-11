@@ -1,8 +1,10 @@
-body{
-	background-color: #EDEFF0;
+.nav{
+	&__item{
+		display: inline-block;
+	}
 }
+
 .section-search{
-	// background-color: #fff;
 	&__title{
 		font-size: 30px;
 		text-align: center;

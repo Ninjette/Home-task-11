@@ -5,7 +5,11 @@ function serviceFunc($http){
 		$http.get(`/angular/search?s=${query}&page=${page}`).then(callback);
 	};
 
-	this.getItemJSON = (title, callback) =>{
+	this.getItemJSON = (title, callback) => {
 		$http.get(`/angular/item/?t=${title}`).then(callback);
+	};
+
+	this.getComments = (title, callback) => {
+		$http.get(`/get-comments/?t=${title}`).then(callback);
 	};
 }

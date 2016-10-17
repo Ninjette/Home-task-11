@@ -14,7 +14,7 @@ html
 		meta(name='keywords', content='')
 		// *** Fonts ***
 		// 
-		link(rel='stylesheet', href='')
+		link(rel='stylesheet', href='./external/five-star-rating-master/css/rating.min.css')
 		// *** Favicons ***
 		//if IE
 			link(rel='icon', href='/favicon.ico')
@@ -30,12 +30,26 @@ html
 	body
 		// Header block
 		header.header
+			ul.nav
+				li.nav__item
+					a(href='/').btn.btn-default Start page
+				if (!user)
+					li.nav__item
+						a(href='/login').btn.btn-default Login
+					li.nav__item
+						a(href='/signup').btn.btn-default Sign Up
+				else
+					li.nav__item
+						a(href='/logout').btn.btn-default Logout
 		main(ng-app='moviesApp')
 			div(ng-view='', ng-controller='mainController')
 		// Footer block
 		footer.footer
 		// *** Scripts ***
 		// Angular
+		if user
+			script.
+				var desired = !{JSON.stringify(user.desired)};
 		script(src='https://code.angularjs.org/1.2.16/angular.min.js')
 			<!--Angular-route-->
 		script(src='https://code.angularjs.org/1.2.16/angular-route.min.js')

@@ -2,8 +2,9 @@ export {mainController}
 
 function mainController($scope, $http, dataService) {
 	$scope.show = false;
-	$scope.desired = {};
-	$scope.propertyName = "Year"; 
+	$scope.desired = window.desired || [];
+    console.log('window.desired', window.desired);
+	$scope.propertyName = "Year";
 	let inputData;
 
 	$scope.changePage = (page) =>{
@@ -50,7 +51,7 @@ function mainController($scope, $http, dataService) {
 
 	// Desired
 	$scope.elemMask = 'elem_';
-	$scope.desired = [];
+    /*$scope.desired = [];
 	$scope.showDesired = () =>{
 		$scope.lsLength = localStorage.length;
 		if ($scope.lsLength > 0) {
@@ -64,20 +65,19 @@ function mainController($scope, $http, dataService) {
 		};
 		$scope.renderReviewsAmount($scope.desired);
 	}
-	$scope.showDesired();
+    $scope.showDesired();*/
 
-	$scope.addToDesired = (movie) => {
-		console.log(movie);
-		$http.post('/add-desired', {movie}).then((resp) => {
-			console.log('resp', resp);
-			if (resp.data.type == 'success') {
-				$scope.desired.push(movie);
-			}
-		});
-/*
+    $scope.addToDesired = (movie) => {
+        console.log(movie);
+        $http.post('/add-desired', {movie}).then((resp) => {
+            if (resp.data.type == 'success') {
+                $scope.desired.push(movie);
+            }
+        });
+        /*
 		$scope.hasSameId = false;
 
-		for(let index in $scope.desired) { 
+		for(let index in $scope.desired) {
 			if($scope.desired[index].imdbID == movie.imdbID){
 				$scope.hasSameId = true;
 			};

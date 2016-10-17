@@ -1,17 +1,19 @@
 export {itemController}
 
-function itemController($scope, dataService, $location){
+function itemController($scope, dataService, $location, $http) {
 	//rating
 	$scope.rating = 0;
 	let ratingDiv = document.querySelector('.rating');
-	let currentRating = 0;
-	let maxRating = 5;
+    if (ratingDiv) {
+        let currentRating = 0;
+        let maxRating = 5;
 
-	let callback = function(rating) { 
-		$scope.rating = rating;
-	};
+        let callback = function(rating) {
+            $scope.rating = rating;
+        };
 
-	let myRating = rating(ratingDiv, currentRating, maxRating, callback);
+        let myRating = rating(ratingDiv, currentRating, maxRating, callback);
+    }
 
 
 	let path = $location.path();
@@ -21,8 +23,12 @@ function itemController($scope, dataService, $location){
 	$scope.getInfo = (title) =>{
 		dataService.getItemJSON(title, (response) =>{
 			$scope.item = response.data;
-			$scope.showReviews($scope.item.imdbID);
+			//$scope.showReviews($scope.item.imdbID);
 		});
+        dataService.getComments(title, (response) => {
+            console.log('response', response);
+            $scope.reviews = response.data;
+        });
 	};
 
 	$scope.getInfo(titleName);
@@ -31,7 +37,7 @@ function itemController($scope, dataService, $location){
 	$scope.reviewMask = 'review_';
 
 	
-	$scope.showReviews = (itemID) => {
+	/*$scope.showReviews = (itemID) => {
 		$scope.lsLength = localStorage.length;
 		if ($scope.lsLength > 0) {
 			for(let i = 0; i < $scope.lsLength; i++) {
@@ -41,31 +47,19 @@ function itemController($scope, dataService, $location){
 					let lsKey = localStorage.getItem(key);
 				}
 			}
-		};
-	}
+		}
+	};*/
 	// $scope.showReviews();
 
-	$scope.addReview = (review) =>{
+	$scope.addReview = (movieTitle, text) => {
 		//Local storage saving
-		if (!$scope.hasSameId) {
-			let objectLength = Object.keys($scope.reviews).length;
-			if (objectLength > 0) {
-				$scope.reviewId = objectLength;
-			} else {
-				$scope.reviewId = 0;
-			};
-			// movie.attrID = $scope.elemMask + $scope.elemId; what is it
-
-			localStorage.setItem(
-				$scope.reviewMask + $scope.reviewId + "_" + $scope.item.imdbID, 
-				JSON.stringify({text: review, rating : $scope.rating})
-			);
-		};
-		//make new review visible on view
-		$scope.reviews.push({
-			text: review,
-			rating : $scope.rating
-		});
-		$scope.reviewText = '';
+        $http.post('/add-comment', {movieTitle, text, rating: $scope.rating}).then(() => {
+            //make new review visible on view
+            $scope.reviews.push({
+                text,
+                rating : $scope.rating
+            });
+            $scope.reviewText = '';
+        });
 	}
 }

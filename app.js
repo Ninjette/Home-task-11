@@ -104,10 +104,16 @@ app.get('/angular/search', angularController.getSearch);
 app.get('/angular/template/item', angularController.getItemTemplate);
 app.get('/angular/template/search', angularController.getSearchTemplate);
 app.post('/add-desired', angularController.addDesired);
+app.post('/add-comment', angularController.addComment);
+app.get('/get-comments', angularController.getComments);
 
 const User = require('./models/User');
 app.get('/json/users', (req, res) => {
 	User.find().exec((err, users) => res.send(users));
+});
+const Comment = require('./models/Comment');
+app.get('/json/comments', (req, res) => {
+	Comment.find().exec((err, docs) => res.send(docs));
 });
 
 app.get('/login', userController.getLogin);

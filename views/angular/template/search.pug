@@ -1,45 +1,46 @@
 section.section-search
-  .section-search__title Movie search
-  form.form-inline.text-center
-    .search
-      input.form-control(type='text', ng-model='input', required='')
-      button.btn.btn-success(ng-click="searchFunc(input); show='true'") submit
-  .container
-    .row
-      .col-sm-6.sorting(ng-show='show')
-        p.sorting__title Sorting by
-        select.form-control(ng-model='sortingValue')
-          option(value='') Don't sort
-          option(value='Title') Title
-          option(value='Type') Type
-          option(value='Year') Year
-      .col-sm-6.filter(ng-show='show')
-        p.filter__title Filtering
-        select.form-control(ng-model='filterValue')
-          option(value='') Don't filter
-          option(value='Movie') Movie
-          option(value='Series') Series
-          option(value='Episode') Episode
-          option(value='Game') Game
-    hr
-    .movie.clearfix.movie--desired(ng-repeat='item in desired')
-      .movie__info.pull-left
-        .movie__label Desired
-        h3 Name: {{item.Title}}
-        h5 Type {{item.Type}}
-        h5 Year: {{item.Year}}
-        h5 reviews: {{item.reviews}}
-        a.movie__link.btn.btn-info(ng-href='#/item_{{item.Title}}') more info
-    .search-result
-      .movie.movie--result.clearfix(ng-show='show', ng-repeat='movie in movies | orderBy: sortingValue:reverse | filter: filterValue')
-        .movie__info.pull-left
-          h3 Name: {{movie.Title}}
-          h5 Type {{movie.Type}}
-          h5 Year: {{movie.Year}}
-          h5 reviews: {{movie.reviews}}
-          .btn.btn-info.movie__desired(ng-click='addToDesired(movie)') add to desired
-          a.movie__link.btn.btn-info(ng-href='#/item_{{movie.Title}}') more info
-    ul.pagination
-      li.pagination__item(ng-repeat='page in pages')
-        button.pagination__number(ng-click='changePage(page.num)') {{page.num}}
+	.section-search__title Movie search
+	form.form-inline.text-center
+		.search
+			input.form-control(type='text', ng-model='input', required='')
+			button.btn.btn-success(ng-click="searchFunc(input); show='true'") submit
+	.container
+		.row
+			.col-sm-6.sorting(ng-show='show')
+				p.sorting__title Sorting by
+				select.form-control(ng-model='sortingValue')
+					option(value='') Don't sort
+					option(value='Title') Title
+					option(value='Type') Type
+					option(value='Year') Year
+			.col-sm-6.filter(ng-show='show')
+				p.filter__title Filtering
+				select.form-control(ng-model='filterValue')
+					option(value='') Don't filter
+					option(value='Movie') Movie
+					option(value='Series') Series
+					option(value='Episode') Episode
+					option(value='Game') Game
+		hr
+		.movie.clearfix.movie--desired(ng-repeat='item in desired')
+			.movie__info.pull-left
+				.movie__label Desired
+				h3 Name: {{item.Title}}
+				h5 Type {{item.Type}}
+				h5 Year: {{item.Year}}
+				h5 reviews: {{item.reviews}}
+				a.movie__link.btn.btn-info(ng-href='#/item_{{item.Title}}') more info
+		.search-result
+			.movie.movie--result.clearfix(ng-show='show', ng-repeat='movie in movies | orderBy: sortingValue:reverse | filter: filterValue')
+				.movie__info.pull-left
+					h3 Name: {{movie.Title}}
+					h5 Type {{movie.Type}}
+					h5 Year: {{movie.Year}}
+					h5 reviews: {{movie.reviews}}
+					if user
+						.btn.btn-info.movie__desired(ng-click='addToDesired(movie)') add to desired
+					a.movie__link.btn.btn-info(ng-href='#/item_{{movie.Title}}') more info
+		ul.pagination
+			li.pagination__item(ng-repeat='page in pages')
+				button.pagination__number(ng-click='changePage(page.num)') {{page.num}}
 script(type='text/javascript', src='bundle.js')
