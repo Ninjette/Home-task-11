@@ -28,7 +28,7 @@ exports.postLogin = (req, res, next) => {
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      res.redirect(req.session.returnTo || '/');
+      res.redirect('/');
     });
   })(req, res, next);
 };

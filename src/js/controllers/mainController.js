@@ -51,21 +51,6 @@ function mainController($scope, $http, dataService) {
 
 	// Desired
 	$scope.elemMask = 'elem_';
-    /*$scope.desired = [];
-	$scope.showDesired = () =>{
-		$scope.lsLength = localStorage.length;
-		if ($scope.lsLength > 0) {
-			for(let i = 0; i < $scope.lsLength; i++) {
-				let key = localStorage.key(i);
-				if(key.indexOf($scope.elemMask) == 0) {
-					$scope.desired.push(JSON.parse(localStorage.getItem(key)));
-					let lsKey = localStorage.getItem(key);
-				}
-			}
-		};
-		$scope.renderReviewsAmount($scope.desired);
-	}
-    $scope.showDesired();*/
 
     $scope.addToDesired = (movie) => {
         console.log(movie);
@@ -74,26 +59,5 @@ function mainController($scope, $http, dataService) {
                 $scope.desired.push(movie);
             }
         });
-        /*
-		$scope.hasSameId = false;
-
-		for(let index in $scope.desired) {
-			if($scope.desired[index].imdbID == movie.imdbID){
-				$scope.hasSameId = true;
-			};
-		};
-
-		if (!$scope.hasSameId) {
-			let objectLength = Object.keys($scope.desired).length;
-			if (objectLength > 0) {
-				$scope.elemId = objectLength;
-			} else {
-				$scope.elemId = 0;
-			};
-			movie.attrID = $scope.elemMask + $scope.elemId;
-			$scope.desired.push(movie);
-
-			localStorage.setItem($scope.elemMask + $scope.elemId, JSON.stringify(movie));
-		};*/
 	}
 }
