@@ -116,11 +116,12 @@ app.get('/json/comments', (req, res) => {
 	Comment.find().exec((err, docs) => res.send(docs));
 });
 
-app.get('/login', userController.getLogin);
+app.get('/angular/template/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
-app.get('/signup', userController.getSignup);
+app.get('/angular/template/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
+
 
 /**
  * Error Handler.

@@ -16,4 +16,11 @@ angular.module("moviesApp",['ngRoute'])
 			.when('/',{
 				templateUrl: '/angular/template/search'
 			})
+			.when('/login',{
+				templateUrl: '/angular/template/login'
+			})
+			.when('/signup',{
+				templateUrl: '/angular/template/signup'
+			})
+
 	});

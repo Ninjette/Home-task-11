@@ -11,7 +11,7 @@ exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect('/');
   }
-  res.render('account/login', {
+  res.render('angular/template/login', {
     title: 'Login'
   });
 };
@@ -24,7 +24,7 @@ exports.postLogin = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }
     if (!user) {
-      return res.redirect('/login');
+      return res.redirect('/#/login');
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
@@ -50,7 +50,7 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect('/');
   }
-  res.render('account/signup', {
+  res.render('angular/template/signup', {
     title: 'Create Account'
   });
 };
@@ -68,7 +68,7 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {
-      return res.redirect('/signup');
+      return res.redirect('/#/signup');
     }
     user.save((err) => {
       if (err) { return next(err); }
